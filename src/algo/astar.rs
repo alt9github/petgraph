@@ -2,6 +2,7 @@ use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::{BinaryHeap, HashMap};
 
 use std::hash::Hash;
+use ahash::AHashMap;
 
 use crate::scored::MinScored;
 use crate::visit::{EdgeRef, GraphBase, IntoEdges, Visitable};
@@ -79,8 +80,8 @@ where
     K: Measure + Copy,
 {
     let mut visit_next = BinaryHeap::new();
-    let mut scores = HashMap::new(); // g-values, cost to reach the node
-    let mut estimate_scores = HashMap::new(); // f-values, cost to reach + estimate cost to goal
+    let mut scores = AHashMap::new(); // g-values, cost to reach the node
+    let mut estimate_scores = AHashMap::new(); // f-values, cost to reach + estimate cost to goal
     let mut path_tracker = PathTracker::<G>::new();
 
     let zero_score = K::default();
